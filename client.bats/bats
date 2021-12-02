@@ -1,0 +1,15 @@
+#!/bin/bash
+BATS_BUILD=${__BLESSED_ROOT__}/__build__
+BATS_REAL=${BATS_BUILD}/bats-core/bin/bats
+
+x () {
+    src=https://github.com/bats-core/$1
+    dst=${BATS_BUILD}/$1
+    [ -d $dst ] || git clone $src $dst
+}
+
+x bats-core
+x bats-support
+x bats-assert
+
+${BATS_REAL} $*

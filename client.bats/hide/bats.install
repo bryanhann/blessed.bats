@@ -1,0 +1,15 @@
+BUILD=${__BLESSED_ROOT__}/__build__
+REAL=${BUILD}/bats-core/bin/bats
+LINK=~/.local/bin/bats
+echo ${REAL} \$* > $LINK
+chmod +x $LINK
+
+x () {
+    src=https://github.com/bats-core/$1
+    dst=${BUILD}/$1
+    [ -d $dst ] || git clone $src $dst
+}
+
+x bats-core
+x bats-support
+x bats-assert
